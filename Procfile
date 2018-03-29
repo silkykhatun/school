@@ -1,1 +1,1 @@
-web: gunicorn restblog.wsgi
+web: gunicorn school.wsgi
