@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+{% load static %}
+{% load staticfiles %}
+{% block title %}
+	<title>Welcome Home</title>
+{% endblock %}
+
+
+{% block home-marquee %}
+<div class="col-md-12" id="blog-div">
+	<form method="POST">
+		{% csrf_token %}
+
+		<div class="form-group">
+	        <div class="col-md-10">
+	          <h3>All Courses</h3>
+	        </div>
+	     </div>
+	    <div class="row">
+		  <div class="col-md-12">
+		  	<table class="table table-hover table-bordered table-striped">
+				<thead>
+					<tr>
+						<th>Course Name</th>
+						<th>Topic</th>
+						<th>Students Enrolled</th>
+						<th>Available</th>
+						<th>Enroll</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for entry in entries %}
+					<tr>
+						<td>{{entry.course_name}}</td>
+						<td>{{entry.topic}}</td>
+						<td id="stc-{{entry.id}}">{{entry.student_count}}</td>
+						<td id="av-{{entry.id}}">{% if entry.is_available %} Yes {% else %} No {% endif %}</td>
+						<td id="td-{{entry.id}}">
+							{% if entry not in enrolled_courses %}
+								<a id="enroll-{{entry.id}}" href="javascript:void(0)" onclick="enroll({{ entry.id }})" class="enroll-btn btn btn-xs btn-info {% if entry.student_count > 4 %}disabled{% endif %}">Enroll Now!</a>
+							{% else %}
+								<a id="quit-{{entry.id}}" href="javascript:void(0)" onclick="quit({{ entry.id }})" class="enroll-btn btn btn-xs btn-danger">Quit</a>
+							{% endif %}
+
+						</td>
+					</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		  </div>
+		</div>
+		
+	</form>
+</div>
+<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true"></div>
+{% endblock %}
+
+{% block js-required %}
+<script>
+	var ENROLL = '{% url "enroll" %}';
+	var QUIT = '{% url "quit" %}';
+</script>
+<script type="text/javascript" src="{% static 'js/app.js' %}"></script>
+{% endblock %}
+
+{% block css-required %}
+<style type="text/css">
+	.loader{text-align: center;}
+	.loader.col-md-12 > img{max-height: 50px;}
+	.blog-panel {display: inline-block;margin: 15px 35px;}
+	.blog-panel{padding-left: 0px;padding-right: 0px;}
+	.form-element{margin: : 10px;}
+	.panel-item{padding: 16px!important;}
+</style>
+{% endblock %}

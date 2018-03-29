@@ -1,0 +1,9 @@
+dj-database-url==0.5.0
+Django==1.11
+django-rest-framework==0.1.0
+django-rest-framework-docs==0.1.7
+django-rest-swagger==2.1.2
+djangorestframework==3.7.7
+ipython==6.2.1
+psycopg2==2.7.4
+psycopg2-binary==2.7.4

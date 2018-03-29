@@ -1,0 +1,57 @@
+{% load static %}
+<div class="container-fluid">
+	<div class="row">
+	  <div class="page-header">
+	  	  <div class="col-md-12">
+			<div class="col-md-6">
+				<a href="{% url 'home' %}">
+					<h1 class="teal-text text-lighten-2 Montserrat">
+						School
+					</h1>
+				</a>
+			</div>
+			<div class="col-md-6">
+				<form action="#" id="search-blog-form">
+					<div class="form-group label-floating search-form-div">
+					  <input name="ppt_title" class="form-control" id="search-feed" type="text" name="search" placeholder="Search Courses">
+					</div>
+				</form>
+			</div>
+		  </div>
+		<div class="col-md-12">
+		<div class="col-md-8">
+		{% if user.is_authenticated %}
+			<a href="{% url 'home' %}" class="btn" style="padding:5px 20px;margin:5px 1px;">Home</a>
+			<a href="{% url 'all_course' %}" class="btn" style="padding:5px 20px;margin:5px 1px;">My Courses</a>
+		</div>
+		<div class="col-md-4">
+			<span class="pull-right">
+				<div class="dropdown">
+				  <a id="dLabel" data-target="#" href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+				    {{user.first_name}}
+				    <span class="caret"></span>
+				  </a>
+
+				  <ul class="dropdown-menu" aria-labelledby="dLabel">
+				    <li><a href="{% url 'change_password' %}"><i class="glyphicon glyphicon-user"></i> Manage</a> </li>
+				    <li><a href="{% url 'logout' %}"><i class="glyphicon glyphicon-off"></i>Logout</a> </li>
+				  </ul>
+				</div>
+			</span>
+		</div>
+		{% else %}
+		</div>
+		<div class="col-md-4">
+			<span class="pull-right">
+				<a href="{% url 'login' %}">Login</a> | <a href="{% url 'register' %}">Signup</a>
+			</span>
+		</div>
+		{% endif %}
+		</div>
+	  </div>
+	</div>
+</div>
+<div style="min-height:120px;"></div>
+<style type="text/css">
+	
+</style>
